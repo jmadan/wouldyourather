@@ -1,28 +1,41 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import logo from './logo.svg';
 import './App.css';
+import Home from './components/home';
+import NavBar from './components/navbar/navbar';
+import * as AppActions from './actions/appActions';
 
 class App extends Component {
+
+  componentDidMount(){
+    const { actions } = this.props;
+    actions.loadInitialData()
+  }
+
   render() {
     return (
       <div className="App">
+        <NavBar />
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <Home {...this.props}/>
         </header>
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps(store) {
+  return ({
+    appContext: store.AppContext
+  });
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Object.assign({}, AppActions), dispatch,),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
