@@ -1,26 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import logo from './logo.svg';
+import { Router } from 'react-router-dom';
 import './App.css';
-import Home from './components/home';
-import NavBar from './components/navbar/navbar';
 import * as AppActions from './actions/appActions';
-
+import * as userActions from './actions/userActions';
+import history from './history';
+import NavBar from './components/navbar/navbar';
+import Routes from './router';
 class App extends Component {
+  constructor(){
+    super();
+    this.signout = this.signout.bind(this);
+  }
 
   componentDidMount(){
     const { actions } = this.props;
-    actions.loadInitialData()
+      actions.loadInitialData();
+  }
+
+  signout(){
+    const { actions } = this.props;
+    actions.userSignOut();
   }
 
   render() {
     return (
       <div className="App">
-        <NavBar />
-        <header className="App-header">
-          <Home {...this.props}/>
-        </header>
+        <Router history={history}>
+          <>
+            <NavBar {...this.props} signout={this.signout} />
+            <hr />
+            <div style={{ minHeight: '35em' }}>
+              <Routes {...this.props}/>
+            </div>  
+          </>
+        </Router>
       </div>
     );
   }
@@ -28,13 +43,14 @@ class App extends Component {
 
 function mapStateToProps(store) {
   return ({
-    appContext: store.AppContext
+    appContext: store.AppContext,
+    users: store.Users,
   });
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Object.assign({}, AppActions), dispatch,),
+    actions: bindActionCreators(Object.assign({}, AppActions, userActions), dispatch),
   };
 }
 

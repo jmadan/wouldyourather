@@ -3,7 +3,7 @@ import {
     _getQuestions,
     _saveQuestion,
     _saveQuestionAnswer
-  } from './DATA.js'
+  } from './_DATA.js'
   
   export const getInitialData = () => {
     return Promise.all([
@@ -16,6 +16,7 @@ import {
   }
   
   export const saveQuestion = info => {
+    console.log(info);
     return _saveQuestion(info)
   }
   

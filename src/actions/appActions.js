@@ -13,3 +13,20 @@ export function loadInitialData() {
     }
 
 }
+
+export function userSignIn(user) {
+    return (dispatch) => {
+        return dispatch({
+            type: 'SIGNIN_USER',
+            payload: user
+        });
+    }
+}
+
+export function userSignOut() {
+    return (dispatch) => {
+        return dispatch({
+            type: 'SIGNOUT_USER'
+        });
+    }
+}

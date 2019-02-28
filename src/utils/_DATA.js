@@ -106,6 +106,7 @@ let users = {
   }
   
   function formatQuestion ({ optionOneText, optionTwoText, author }) {
+      console.log(optionOneText, optionTwoText, author)
     return {
       id: generateUID(),
       timestamp: Date.now(),
