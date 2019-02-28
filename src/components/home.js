@@ -21,11 +21,9 @@ class Home extends Component {
                 </ul>
                 <div className="tab-content" id="myTabContent">
                   <div className="tab-pane fade show active" id="unanswered" role="tabpanel" aria-labelledby="unanswered-tab">
-                    <p>Unanswered Questions</p>
                     <UnAnsweredQs />
                   </div>
                   <div className="tab-pane fade" id="answered" role="tabpanel" aria-labelledby="answered-tab">
-                  <p>Answered Questions</p>
                     <AnsweredQs />
                   </div>
                 </div>
