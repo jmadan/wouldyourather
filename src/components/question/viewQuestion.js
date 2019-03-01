@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as UserActions from '../../actions/userActions';
 import QuestionStats from './questionStats';
+// import { Redirect } from 'react-router-dom';
 
 
 class ViewQuestion extends Component {
@@ -54,44 +55,63 @@ class ViewQuestion extends Component {
         const author = users[question.author];
         const { answered } = this.state;
 
+        if(!question){
+            this.props.history.push('/404');
+        }
+
         if(!answered){
             return(
                 <div className="container">
-            <div className="row">
-            <div className="col-6 offset-md-3">
-                <div className="card">
-                        <div className="card-body">
-                            <div className="card-header bold">{author.name} asks:</div>
-                            <div className='container'>
-                                <div className='row justify-content-center'>
-                                    <div className='col-4 border-right my-auto'>
-                                        <img src={author.avatarURL} alt={author.name} className='rounded-circle' width="150" height="150"/>
-                                    </div>
-                                    <div className='col-8'>
-                                        <h5 className="card-title">Would You Rather...</h5>
-                                        <form onSubmit={(event) => this.onSubmit(event, questionid)} className="float-left">
-                                            <div className="form-group form-check float-left">
-                                                <input className="form-check-input" type="radio" name="poll" id="option1" value="optionOne" onChange={this.handleChange}/>
-                                                <label className="form-check-label" htmlFor="exampleRadios1">
-                                                    {question.optionOne.text}
-                                                </label>
+                    <div className="row">
+                        <div className="col-6 offset-md-3">
+                            <div className="card">
+                                    <div className="card-body">
+                                        <div className="card-header bold">{author.name} asks:</div>
+                                        <div className='container'>
+                                            <div className='row justify-content-center'>
+                                                <div className='col-4 border-right my-auto'>
+                                                    <img src={author.avatarURL} alt={author.name} className='rounded-circle' width="150" height="150"/>
+                                                </div>
+                                                <div className='col-8'>
+                                                    <h5 className="card-title">Would You Rather...</h5>
+                                                    <div className="container">
+                                                    <form onSubmit={(event) => this.onSubmit(event, questionid)} className="float-left w-100">
+
+                                                        <div className="row">
+                                                            <div className="col p-2">
+                                                                <div className="form-group form-check float-left">
+                                                                    <input className="form-check-input" type="radio" name="poll" id="option1" value="optionOne" onChange={this.handleChange}/>
+                                                                    <label className="form-check-label" htmlFor="exampleRadios1">
+                                                                        {question.optionOne.text}
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div> 
+                                                        <div className="row">
+                                                            <div className="col p-2">
+                                                                <div className="from-group form-check float-left">
+                                                                        <input className="form-check-input" type="radio" name="poll" id="option2" value="optionTwo" onChange={this.handleChange}/>
+                                                                        <label className="form-check-label" htmlFor="exampleRadios2">
+                                                                            {question.optionTwo.text}
+                                                                        </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col p-2">
+                                                                <button type="submit" className="btn btn-block btn-outline-success" disabled={this.state.answered}>Submit</button>
+                                                            </div>
+                                                        </div>
+                                                        </form>
+                                                    </div>    
+                                                </div>
+
                                             </div>
-                                            <div className="from-group form-check float-left">
-                                                <input className="form-check-input" type="radio" name="poll" id="option2" value="optionTwo" onChange={this.handleChange}/>
-                                                <label className="form-check-label" htmlFor="exampleRadios2">
-                                                    {question.optionTwo.text}
-                                                </label>
-                                            </div>
-                                            <br/>
-                                            <button type="submit" className="btn btn-block btn-outline-success" disabled={this.state.answered}>Submit</button>
-                                        </form>
+                                        </div>
                                     </div>
-                                </div>
+                            </div>
                             </div>
                         </div>
-                </div>
-                </div>
-                </div>
                 </div>
             )
         } else {

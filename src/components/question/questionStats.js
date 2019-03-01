@@ -28,7 +28,7 @@ const QuestionStats = (props) => {
                                         ${(userChoice === 'optionOne' ? <span className="notify-badge">Your Vote</span> : '')}
                                             <p>Would you rather {question.optionOne.text}</p>
                                             <div className="progress">
-                                                <div className="progress-bar bg-success" role="progressbar" style={{width: `${option1Votes}%`}} aria-valuenow={option1Votes} aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div className="progress-bar bg-success" role="progressbar" style={{width: `${option1Votes}%`}} aria-valuenow={option1Votes} aria-valuemin="0" aria-valuemax="100">{option1Votes}%</div>
                                             </div>
                                             <div>
                                                 <span>{question.optionOne.votes.length} out of {totalVotes} votes.</span>
@@ -39,7 +39,7 @@ const QuestionStats = (props) => {
                                             ${(userChoice === 'optionTwo' ? <span className="notify-badge">Your Vote</span> : '')}
                                             <p>Would you rather {question.optionTwo.text}</p>
                                             <div className="progress">
-                                                <div className="progress-bar bg-success" role="progressbar" style={{width: `${option2Votes}%`}} aria-valuenow={option2Votes} aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div className="progress-bar bg-success" role="progressbar" style={{width: `${option2Votes}%`}} aria-valuenow={option2Votes} aria-valuemin="0" aria-valuemax="100">{option2Votes}%</div>
                                             </div>
                                             <div>
                                                 <span>{question.optionTwo.votes.length} out of {totalVotes} votes.</span>

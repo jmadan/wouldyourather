@@ -9,6 +9,8 @@ import ViewQuestion from './components/question/viewQuestion';
 
 import AddQuestion from './components/question/addQuestion';
 import PrivateRoute from './components/private';
+import NotFound from './components/notfound';
+
 const Routes = (props) => {
     const { appContext } = props;
     const isAuthenticated = appContext.loggedInUserId ? true : false;
@@ -21,6 +23,7 @@ const Routes = (props) => {
                 <PrivateRoute exact path="/add" component={withRouter(AddQuestion)} isAuthenticated={isAuthenticated} />
                 <PrivateRoute exact path="/questions/:id" component={withRouter(ViewQuestion)} isAuthenticated={isAuthenticated} />
                 <PrivateRoute exact path="/leader" component={withRouter(Leader)} isAuthenticated={isAuthenticated} {...props} />
+                <Route component={NotFound} />
             </Switch>
         </Suspense>
         </div>
