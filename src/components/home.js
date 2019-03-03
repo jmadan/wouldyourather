@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import AnsweredQs from './dashboard/userAnsweredQ';
 import UnAnsweredQs from './dashboard/userUnAnsweredQ';
 // import logo from '../../public/imgs/logo.svg';
 
-class Home extends Component {
-
-    render(){
-       
-        return (
+const Home = () => (
             <div className="container">
             <div className="media-body">
               <div className="container-fluid">
@@ -30,8 +26,6 @@ class Home extends Component {
               </div>
             </div>
             </div>
-        )
-    }
-}
+        );
 
 export default Home;

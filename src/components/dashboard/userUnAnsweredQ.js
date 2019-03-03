@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import QuestionView from '../question/pollQuestionView';
 
 
-class UserAnsweredQ extends Component {
+class UserUnAnsweredQ extends Component {
     render(){
         const { questions, appContext, users } = this.props;
         const user = users[appContext.loggedInUserId];
@@ -29,5 +29,5 @@ const mapStateToProps = (store) => {
     }
 }
 
-export default connect(mapStateToProps)(UserAnsweredQ);
+export default connect(mapStateToProps)(UserUnAnsweredQ);
 

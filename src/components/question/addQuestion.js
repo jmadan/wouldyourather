@@ -20,8 +20,10 @@ class AddQuestion extends Component {
         const { actions, appContext } = this.props;
         const { loggedInUserId } = appContext;
         const {option1, option2} = this.state;
-        actions.saveQuestionAction({optionOneText: option1, optionTwoText: option2, author:loggedInUserId});
-        this.props.history.push('/');
+        if(option1 || option2 ){
+            actions.saveQuestionAction({optionOneText: option1, optionTwoText: option2, author:loggedInUserId});
+            this.props.history.push('/');
+        }
     }
 
     handleChange(event){

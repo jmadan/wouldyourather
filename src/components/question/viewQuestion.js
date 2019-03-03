@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as UserActions from '../../actions/userActions';
+// import { getQuestions } from '../../utils/api';
 import QuestionStats from './questionStats';
-// import { Redirect } from 'react-router-dom';
-
+import { Redirect } from 'react-router-dom';
 
 class ViewQuestion extends Component {
 
@@ -13,7 +13,8 @@ class ViewQuestion extends Component {
         this.state = {
             selectedOption: '',
             answered: false,
-            userid: ''
+            userid: '',
+
         }
         this.onSubmit = this.onSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -22,6 +23,12 @@ class ViewQuestion extends Component {
     componentDidMount(){
         const { users, appContext } = this.props;
         const questionid = this.props.match.params.id;
+        // getQuestions().then(quests => {
+        //     if(!Object.keys(quests).includes(questionid)){
+        //         this.props.history.push('/404');
+        //     }
+        // });
+        
         const usersAnsweredQuestions = Object.keys(users[appContext.loggedInUserId].answers);
         if(usersAnsweredQuestions.includes(questionid)){
             this.setState({
@@ -49,15 +56,14 @@ class ViewQuestion extends Component {
     }
 
     render(){
-        const { users, questions, appContext } = this.props;
+        const { users, appContext, questions } = this.props;
         const questionid = this.props.match.params.id;
         const question = questions[questionid];
+        if(!question){
+           return  <Redirect to="/404" />
+        }
         const author = users[question.author];
         const { answered } = this.state;
-
-        if(!question){
-            this.props.history.push('/404');
-        }
 
         if(!answered){
             return(
